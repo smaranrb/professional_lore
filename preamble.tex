@@ -21,9 +21,14 @@
 \emergencystretch=3em
 \hbadness=10000
 
+\newcommand{\bodySize}{9.75}          % your target point size
+\newcommand{\bodyLeading}{11.2}      % line spacing — usually ~1.2x the size
+
+\AtBeginDocument{\fontsize{\bodySize}{\bodyLeading}\selectfont}
+
 \newcommand{\nameSize}{\huge}        % your name at the top
 \newcommand{\sectionSize}{\normalsize}  % EDUCATION / EXPERIENCE / etc. headers
-\newcommand{\bodySize}{\normalsize}     % default body text size
+% \newcommand{\bodySize}{\normalsize}     % default body text size
 \newcommand{\eduSize}{\small}
 
 % Fonts loaded directly from the project's fonts/ folder by file path —
