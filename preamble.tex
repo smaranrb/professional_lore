@@ -1,0 +1,103 @@
+\usepackage[margin=0.45in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fontawesome5}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{fontspec}
+\usepackage{etoolbox}
+\usepackage[none]{hyphenat}
+\usepackage{multicol}
+\usepackage[absolute,overlay]{textpos}
+
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{1mm}
+\textblockorigin{0mm}{0mm}
+
+\setlength{\multicolsep}{0pt}
+
+\tolerance=9999
+\emergencystretch=3em
+\hbadness=10000
+
+\newcommand{\nameSize}{\huge}        % your name at the top
+\newcommand{\sectionSize}{\normalsize}  % EDUCATION / EXPERIENCE / etc. headers
+\newcommand{\bodySize}{\normalsize}     % default body text size
+\newcommand{\eduSize}{\small}
+
+% Fonts loaded directly from the project's fonts/ folder by file path —
+% avoids macOS Font Book / font-name-matching issues entirely.
+% Place these 6 files in fonts/: Lato-Regular.ttf, Lato-Bold.ttf, Lato-Italic.ttf,
+% Lato-BoldItalic.ttf, Raleway-Regular.ttf, Raleway-Bold.ttf
+\setmainfont{Lato-Regular}[
+  Path = fonts/,
+  Extension = .ttf,
+  BoldFont = Lato-Bold,
+  ItalicFont = Lato-Italic,
+  BoldItalicFont = Lato-BoldItalic
+]
+\newfontfamily\headingfont{Raleway-Regular}[
+  Path = fonts/,
+  Extension = .ttf,
+  BoldFont = Raleway-Bold
+]
+
+\definecolor{navy}{HTML}{1B2A4A}
+\definecolor{ebblue}{HTML}{2979FF}
+\definecolor{subtext}{HTML}{5F6368}
+\definecolor{bodytext}{HTML}{1A2332}
+
+\pagestyle{empty}
+\RaggedRight
+\color{bodytext}
+
+% Section headers: Raleway bold navy, uppercase, thin blue rule below
+\titleformat{\section}
+  {\color{navy}\headingfont\bfseries}
+  {}{0em}{}
+  [\vspace{2pt}{\color{ebblue}\titlerule[1.2pt]}\vspace{4pt}]
+\titlespacing{\section}{0pt}{10pt}{6pt}
+
+% Education-style heading: bullet, bold institution, normal description,
+% right-aligned italic "date range . score"
+\newcommand{\heading}[4]{%
+  \noindent\textbullet\ {\headingfont\bfseries\color{navy}#1}{\normalfont\color{bodytext}\ \textperiodcentered\ #2} \hfill {\normalfont\itshape\color{subtext}\small #3\ \textperiodcentered\ #4}\\[4pt]
+}
+
+\newcommand{\skillline}[2]{%
+  \par\noindent
+  \settowidth{\dimen0}{\headingfont\bfseries #1: }%
+  \hangindent=\dimen0 \hangafter=1
+  {\headingfont\bfseries\color{navy}#1: }{\normalfont\color{bodytext}#2}\par\vspace{3pt}
+}
+
+\usepackage[skins]{tcolorbox}
+\tcbuselibrary{skins}
+\newtcbox{\pill}{on line, arc=6pt, boxsep=1pt, left=7pt, right=7pt, top=2.5pt, bottom=2.5pt,
+  colframe=ebblue, colback=white, boxrule=0.6pt, fontupper=\small\color{navy}}
+
+% Experience-style heading: role/title + location on line 1, company (blue) + dates on line 2
+\NewDocumentCommand{\subheading}{ m m m m O{} }{%
+  \noindent{\headingfont\bfseries\color{navy}\ifstrempty{#5}{#1}{\href{#5}{#1}}} \hfill {\normalfont\itshape\color{subtext}\small #4}\\
+  {\headingfont\bfseries\small\color{ebblue}#2} \hfill {\normalfont\itshape\color{subtext}\small #3}\\[1pt]
+  \color{bodytext}%
+}
+
+% Project-style heading: title left, tech stack (blue italic) right
+\NewDocumentCommand{\projectheading}{ m m O{} }{%
+  \noindent{\headingfont\bfseries\color{navy}\ifstrempty{#3}{#1}{\href{#3}{#1}}} \hfill {\normalfont\itshape\color{ebblue}\small #2}\\
+  \color{bodytext}%
+}
+
+\newcommand{\eduh}[4]{%
+  \noindent\eduSize\textbullet\ {\headingfont\bfseries\color{navy}#1}{\normalfont\color{bodytext}\ \textperiodcentered\ #2} \hfill {\normalfont\itshape\color{subtext}#3\ \textperiodcentered\ #4}\\[4pt]
+}
+
+\setlist[itemize]{leftmargin=1.1em, itemsep=2pt, topsep=3pt, parsep=1pt, label=\textbullet}
+
+\newlength{\nameGap}
+\setlength{\nameGap}{3pt}      % space between your name and the contact-info row
+
+\newlength{\headerGap}
+\setlength{\headerGap}{-4pt}    % space between contact-info row and "EDUCATION"
